@@ -7,7 +7,7 @@ class Board {
 
     void cleanBoard() {
         for (int a = 0; a < boardGame.length; a++) {
-            Arrays.fill(boardGame[a], 0);
+            Arrays.fill(boardGame[a], 5);
         }
     }
     void printBoard() {
@@ -15,9 +15,9 @@ class Board {
             for (int cell : row) {
                 char symbol;
                 switch (cell) {
-                    case 1: symbol = 'X'; break;
-                    case 2: symbol = 'E'; break;
-                    case 3: symbol = 'A'; break;
+                    case 0: symbol = 'X'; break;
+                    case 1: symbol = 'E'; break;
+                    case 2: symbol = 'A'; break;
                     default: symbol = ' ';
                 }
                 System.out.print("[" + symbol + "]");
@@ -25,8 +25,11 @@ class Board {
             System.out.println();
         }
     }
-    void cleanMove() {
-        
+    void putPlayers(Players[] playersTable) {
+        for(int a = 0; a < playersTable.length; a++) {
+            boardGame[playersTable[a].getPlayersY()][playersTable[a].getPlayersX()] = a;
+
+        }
     }
     
 

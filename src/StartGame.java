@@ -1,14 +1,14 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 public class StartGame {
-   
+
     private boolean game = true;
     private boolean gameRestart = true;
     private final int numberSize = 10;
     private Players player1, playerComp, playerApple;
+    private Players[] playersTable = new Players[3];
 
     Messages messages = new Messages();
     Move move = new Move();
@@ -19,32 +19,35 @@ public class StartGame {
 
     StartGame() throws IOException {
         createPlayers();
+        board.cleanBoard();
         System.out.println(messages.getInfo(0));
-        while(game) startGame();
+        while (game)
+            startGame();
     }
-    
+
     void createPlayers() {
-        player1 = createRandomPlayer();
-        playerComp = createRandomPlayer();
-        playerApple = createRandomPlayer();
+        for (int i = 0; i < playersTable.length; i++) {
+            playersTable[i] = createRandomPlayer();
+        }
+        player1 = playersTable[0];
+        playerComp = playersTable[1];
+        playerApple = playersTable[2];
     }
 
     private Players createRandomPlayer() {
         return new Players(randomMachine.returnRandomPos(numberSize),
-                           randomMachine.returnRandomPos(numberSize));
+                randomMachine.returnRandomPos(numberSize));
     }
+
     void startGame() throws IOException {
-        if(gameRestart) board.cleanBoard();
-        
+        if (gameRestart)
+            board.cleanBoard();
+        board.putPlayers(playersTable);
         board.printBoard();
         System.out.println(messages.getInfo(1));
         move.setMove(read.readLine().toLowerCase());
-        board.cleanMove();
         move.changeMove(player1);
-        move.compPlayerMove(playerComp, player1);
+        move.compPlayerMove(playersTable);
 
-        
-    
     }
-    
 }

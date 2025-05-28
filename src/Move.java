@@ -35,11 +35,11 @@ public class Move {
                 System.out.println("Uknown move");
         }
     }
-    void compPlayerMove(Players compMove, Players player1) {
-        if(compMove.getPlayersY() > player1.getPlayersY()) compMove.setPlayersY(compMove.getPlayersY() - 1);
-        if(compMove.getPlayersY() < player1.getPlayersY()) compMove.setPlayersY(compMove.getPlayersY() + 1);
-        if(compMove.getPlayersX() > player1.getPlayersX()) compMove.setPlayersX(compMove.getPlayersX() - 1);
-        if(compMove.getPlayersX() < player1.getPlayersX()) compMove.setPlayersX(compMove.getPlayersX() + 1);
+    void compPlayerMove(Players[] players) {
+        int dy = Integer.compare(players[0].getPlayersY(), players[1].getPlayersY());
+        int dx = Integer.compare(players[0].getPlayersX(), players[1].getPlayersX());
+        players[1].setPlayersY(players[1].getPlayersY() + dy);
+        players[1].setPlayersX(players[1].getPlayersX() + dx);
     }
     void setMove(String move) {
         this.move = move;
