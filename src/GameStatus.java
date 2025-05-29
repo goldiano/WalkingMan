@@ -1,11 +1,11 @@
 public class GameStatus {
-    int checkGame(Players player1, Players playerComp, Players playerApple) {
-        if(player1.getPlayersX() == playerApple.getPlayersX() &&
-        player1.getPlayersY() == playerApple.getPlayersY()) return 1;
 
-        else if(player1.getPlayersX() == playerComp.getPlayersX() &&
-        player1.getPlayersY() == playerComp.getPlayersY()) return 2;
-
-        else return 0;
+    boolean checkGamePlayer(Players[] playersTable) {
+        return playersTable[0].getPlayersY() != playersTable[1].getPlayersY() ||
+               playersTable[0].getPlayersX() != playersTable[1].getPlayersX();
+    }
+    boolean checkGameEat(Players[] playersTable) {
+        return playersTable[2].getPlayersY() != playersTable[1].getPlayersY() ||
+               playersTable[2].getPlayersX() != playersTable[1].getPlayersX();
     }
 }
